@@ -11,12 +11,22 @@ class Client {
         }
     }
 
+    basicAuth(user, pass) {
+        this.bAuth = new Buffer(user + ":" + pass).toString("base64");
+    }
+
     processHeaders() {
 
-        return {
+        var headers = {
             "Accept": "*/*",
             "User-Agent": "Cliente Node.js",
         };
+
+        if(this.bAuth !== undefined) {
+            headers.Authorization = "Basic " + this.bAuth;
+        }
+
+        return headers;
 
     }
 
@@ -27,18 +37,28 @@ class Client {
             port: this.port,
             method: "GET",
             path: this.protocol + "://" + this.host + uri,
-            headers: this.processHeaders()
+            headers: this.processHeaders(),
         };
 
-        this.request(options, callback);
+        this.request(options, null, callback);
 
     }
 
-    post(uri, data) {
+    post(uri, data, callback) {
+
+        var options = {
+            hostname: this.host,
+            port: this.port,
+            method: "POST",
+            path: this.protocol + "://" + this.host + uri,
+            headers: this.processHeaders(),
+        };
+
+        this.request(options, data, callback);
 
     }
 
-    request(options, callback) {
+    request(options, data, callback) {
 
         var http = require(this.protocol);
         var response = {
@@ -59,7 +79,12 @@ class Client {
             });
         });
 
+        if(data !== undefined && data !== null) {
+            request.write(JSON.stringify(data));
+        }
+
         request.end();
+
     }
 
 }
