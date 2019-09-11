@@ -1,3 +1,5 @@
+const fs = require("fs");
+
 
 class Client {
 
@@ -9,6 +11,8 @@ class Client {
         if(protocol !== "http" && protocol !== "https") {
             console.log("Protocol must be http or https");
         }
+
+        this.logDir = fs.mkdtempSync("/tmp/http-client-");
     }
 
     basicAuth(user, pass) {
@@ -19,7 +23,7 @@ class Client {
 
         var headers = {
             "Accept": "*/*",
-            "User-Agent": "Cliente Node.js",
+            "User-Agent": "Node.js Client",
         };
 
         if(this.bAuth !== undefined) {
@@ -75,6 +79,7 @@ class Client {
             responseChannel.on("end", () => {
                 response.status = responseChannel.statusCode;
                 response.headers = responseChannel.headers;
+                fs.appendFile(this.logDir + "/client.log", "logging ...");
                 callback(response);
             });
         });
