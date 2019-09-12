@@ -17,4 +17,23 @@ router.get('/', function(req, res, next) {
     res.send('Animals resource has been seen ' + req.session.views + ' times.');
 });
 
+router.post('/', function(req, res, next) {
+   if(!req.session.animals) {
+       req.session.animals = [];
+   }
+
+   var body = req.body;
+
+   if(req.get("content-type") === "application/json") {
+        console.log("Request validated");
+   } else {
+       res.status(403).send("ERROR");
+   }
+
+   req.session.animals.push(body);
+   console.log(req.session);
+
+   res.send('Request has been received');
+});
+
 module.exports = router;

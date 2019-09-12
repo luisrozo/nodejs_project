@@ -85,7 +85,10 @@ class Client {
         });
 
         if(data !== undefined && data !== null) {
-            request.write(JSON.stringify(data));
+            var body = JSON.stringify(data);
+            request.setHeader("Content-Length", Buffer.byteLength(body));
+            request.setHeader("Content-Type", "application/json");
+            request.write(body);
         }
 
         request.end();
