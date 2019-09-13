@@ -17,17 +17,3 @@ mongoClient.connect(url, (error, database) => {
                 });
         });
 });
-
-/*
-mongoClient.connect(url, (error, db) => {
-    db.collection('animals')
-        .insertOne({
-            name: "Luna",
-            type: "Dog"
-        }, (error, result) => {
-            db.collection("animals")
-                .findOne((error, result) => {
-                    console.log(result);
-                });
-        });
-});*/
