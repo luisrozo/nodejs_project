@@ -18,7 +18,14 @@ githubClient.post("/repos/luisrozo/nodejs_project/issues/1/comments", {
 
 var localClient = new Client("localhost", "3000", "http");
 
+/*
 localClient.post("/animals/", {
     name: "Luna",
     type: "Dog"
-}, (response) => console.log(response));
+}, (response) => console.log(response));*/
+
+localClient.post('/users/', {
+    name: 'Luis',
+    pass: '12345',
+    email: 'email@email.com'
+}, (res) => {});

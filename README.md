@@ -8,6 +8,7 @@ You can find the following folders:
 * ***client***: HTTP client implementation
 * ***backend***: some server-side code managed by Express package
 * ***db***: testing MongoDB and SQLite
+* ***project***: backend API code which is used by app frontend
 
 ### Success certification
 *Coming soon...*
