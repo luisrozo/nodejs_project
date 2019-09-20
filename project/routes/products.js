@@ -11,7 +11,7 @@ function validateLoggedUser(req, res, next) {
     }
 }
 
-router.use(validateLoggedUser());
+router.use(validateLoggedUser);
 
 router.get('/', function(req, res, next) {
     var db = req.app.get('db');

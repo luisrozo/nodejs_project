@@ -12,7 +12,7 @@ function validateLoggedUser(req, res, next) {
     }
 }
 
-router.use(validateLoggedUser());
+router.use(validateLoggedUser);
 
 router.post('/', function(req, res, next) {
     var items = req.body.cart;
